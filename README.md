@@ -26,9 +26,42 @@ Este repositorio forma parte del marco docente de estructura de datos y algoritm
 
 Los estudiantes editan esta sección para agregar sus nombres, correos electrónicos de Uniandes y especificar qué funcionalidad de proyecto implementarán.
 
-1. Nombre del estudiante No. 1, Correo electrónico del estudiante No. 1 Uniandes, Funcionalidad propiedad del estudiante No. 1.
-1. Nombre del estudiante No. 2, Correo electrónico del estudiante No. 2 Uniandes, Funcionalidad propiedad del estudiante No. 2.
-1. Nombre del estudiante No. 3, Correo electrónico del estudiante No. 3 Uniandes, Funcionalidad propiedad del estudiante No. 3.
+1. Roxana Soto Noriega, 202510633, r.soto@uniandes.edu.co 
+1.  Jaime Alejandro Arevalo Gaitan, 202522587, j.arevalog2@uniandes.edu.co
+1.  Adrián Niño Heredia, aninoh@uniandes.edu.co
+ 
+Análisis de Complejidad Temporal 
+Carga de datos 
+Debido a que el archivo se recorre linealmente y cada inserción en los mapas tiene un 
+costo constante promedio, la complejidad temporal de la carga de datos es O(N), donde 
+N corresponde al número total de registros del archivo. 
+Requerimiento 1: Consulta por marca y factor de forma 
+La  complejidad  es  O(K  log  K)  porque  primero  se  accede  al  mapa  hash  de  la  marca  en 
+tiempo  constante  O(1)  y  se  obtiene  solo  el  conjunto  de  K  computadores  que  pertenecen  a 
+esa marca. Luego, sobre esto se realiza el ordenamiento usando Merge Sort,  el cual es O(K 
+log  K.  (Merge  Sort  es  O(K  log  K)  porque  divide  la  lista  en  partes  cada  vez  más  pequeñas 
+(eso  pasa  log  K  veces) y  en  cada  paso  vuelve  a  recorrer todos los  elementos  para  unirlas 
+(K)) 
+ 
+ 
+Requerimiento 2: Consulta por número de núcleos y año de lanzamiento 
+La complejidad temporal del requerimiento es O(K log K) porque se accede directamente al 
+mapa hash indexado por año en tiempo O(1), obteniendo un subconjunto de K 
+computadores lanzados en ese año, después, se filtran los equipos por número de núcleos y 
+se ordenan por peso usando Merge Sort.  
+ 
+Requerimiento 3: Top N equipos más costosos por marca y GPU 
+La  complejidad  temporal  del  requerimiento  es  O(K  log  K)  porque  se  utiliza  un  mapa  hash 
+con llave compuesta para acceder directamente, en tiempo constante, a los K 
+computadores. Luego, este subconjunto se ordena usando Quick Sort que es O(K log K).  
+ 
+Requerimiento 4: Precio promedio por combinación CPU–GPU 
+La  complejidad  temporal  del  requerimiento  es  O(K)  porque  se  accede  al  mapa  hash  del 
+modelo de GPU en tiempo O(1) y se recorre una única vez el subconjunto de K 
+computadores. 
+ 
+Requerimiento 5: Top N equipos mejor equipados por marca y factor de forma 
+
 
 [Volver al inicio](#laboratorio-8)
 
