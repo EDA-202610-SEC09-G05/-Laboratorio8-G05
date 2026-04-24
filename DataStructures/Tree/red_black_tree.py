@@ -15,6 +15,7 @@ def default_compare(key, element):
         return 1
     else:
         return -1
+
     
 def is_red(node_rbt):
     if node_rbt is None:
@@ -90,3 +91,133 @@ def insert_node(root, key, value):
 
     root['size'] = 1 + size_tree(root['left']) + size_tree(root['right'])
     return root
+
+def put(my_rbt, key, value):
+    my_rbt['root'] = insert_node(my_rbt['root'], key, value)
+    my_rbt['root']['color'] = rn.BLACK
+    return my_rbt
+
+
+def get_node(root, key):
+    if root is None:
+        return None
+
+    cmp = default_compare(key, root)
+
+    if cmp == 0:
+        return root['value']
+    elif cmp < 0:
+        return get_node(root['left'], key)
+    else:
+        return get_node(root['right'], key)
+
+
+def get(my_rbt, key):
+    return get_node(my_rbt['root'], key)
+
+
+def contains(my_rbt, key):
+    return get(my_rbt, key) is not None
+
+
+def size(my_rbt):
+    return size_tree(my_rbt['root'])
+
+
+def is_empty(my_rbt):
+    return my_rbt['root'] is None
+
+def key_set_tree(root, key_list):
+    if root is None:
+        return
+    key_set_tree(root['left'], key_list)
+    key_list.append(root['key'])
+    key_set_tree(root['right'], key_list)
+    
+
+def key_set(my_rbt):
+    keys = []
+    key_set_tree(my_rbt['root'], keys)
+    return keys
+
+def value_set_tree(root, value_list):
+    if root is None:
+        return
+    value_set_tree(root['left'], value_list)
+    value_list.append(root['value'])
+    value_set_tree(root['right'], value_list)
+    
+    
+def value_set(my_rbt):
+    values = []
+    value_set_tree(my_rbt['root'], values)
+    return values
+
+def get_min_node(root):
+    if root['left'] is None:
+        return root
+    return get_min_node(root['left'])
+
+
+def get_min(my_rbt):
+    if my_rbt['root'] is None:
+        return None
+    return get_min_node(my_rbt['root'])['key']
+
+def get_max_node(root):
+    if root['right'] is None:
+        return root
+    return get_max_node(root['right'])
+
+def get_max(my_rbt):
+    if my_rbt['root'] is None:
+        return None
+    return get_max_node(my_rbt['root'])['key']
+
+
+def height_tree(root):
+    if root is None:
+        return -1
+    return 1 + max(height_tree(root['left']),
+                   height_tree(root['right']))
+
+
+def height(my_rbt):
+    return height_tree(my_rbt['root'])
+
+def keys_range(root, key_initial, key_final, list_key):
+    if root is None:
+        return
+
+    if key_initial < root['key']:
+        keys_range(root['left'], key_initial, key_final, list_key)
+
+    if key_initial <= root['key'] <= key_final:
+        list_key.append(root['key'])
+
+    if key_final > root['key']:
+        keys_range(root['right'], key_initial, key_final, list_key)
+
+def keys(my_rbt, key_initial, key_final):
+    result = []
+    keys_range(my_rbt['root'], key_initial, key_final, result)
+    return result
+
+def values_range(root, key_initial, key_final, value_list):
+    if root is None:
+        return
+
+    if key_initial < root['key']:
+        values_range(root['left'], key_initial, key_final, value_list)
+
+    if key_initial <= root['key'] <= key_final:
+        value_list.append(root['value'])
+
+    if key_final > root['key']:
+        values_range(root['right'], key_initial, key_final, value_list)
+        
+
+def values(my_rbt, key_initial, key_final):
+    result = []
+    values_range(my_rbt['root'], key_initial, key_final, result)
+    return result
