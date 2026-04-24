@@ -1,5 +1,11 @@
 
 from DataStructures.Tree import rbt_node as rn
+from DataStructures.List import array_list
+from DataStructures.List import single_linked_list
+from DataStructures.Map import map_linear_probing
+from DataStructures.Map import map_separate_chaining
+from DataStructures.List import single_linked_list as sl
+
 
 def new_map():
     rbt = {
@@ -131,12 +137,13 @@ def key_set_tree(root, key_list):
     if root is None:
         return
     key_set_tree(root['left'], key_list)
-    key_list.append(root['key'])
+    sl.add_last(key_list, root['key'])
     key_set_tree(root['right'], key_list)
+
     
 
 def key_set(my_rbt):
-    keys = []
+    keys = sl.new_list()
     key_set_tree(my_rbt['root'], keys)
     return keys
 
@@ -144,12 +151,12 @@ def value_set_tree(root, value_list):
     if root is None:
         return
     value_set_tree(root['left'], value_list)
-    value_list.append(root['value'])
+    sl.add_last(value_list, root['value'])
     value_set_tree(root['right'], value_list)
     
     
 def value_set(my_rbt):
-    values = []
+    values = sl.new_list()
     value_set_tree(my_rbt['root'], values)
     return values
 
